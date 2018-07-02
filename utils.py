@@ -23,7 +23,7 @@ def refactor_json_data(json_list, master_key):
     the key `key` from each dictionary in the list.
 
     >>> refactor_json_data([{'id': 1, 'data': 'stuff'},
-                            {'id': 2, 'data': 'things}])
+                            {'id': 2, 'data': 'things}], 'id')
     {1: {'data': 'stuff'}, 2: {'data': 'things'}}
 
     This is useful for fast lookups.'''
