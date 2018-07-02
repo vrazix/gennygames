@@ -27,7 +27,7 @@ def index():
 <input type="submit">
 </form>'''
 
-app.run()
+#app.run()
 
 if __name__ == '__main__':
     app.run(use_reloader=True)
