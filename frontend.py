@@ -19,7 +19,7 @@ def index():
     return '''<form method="post">
 <input type="checkbox" name="owner" value="tricia">Tricia/Travis<br>
 <input type="checkbox" name="owner" value="ryan">Ryan/Sam<br>
-<input type="checkbox" name="owner" value="pixels">Sam/Andrew<br>
+<input type="checkbox" name="owner" value="andrew">Sam/Andrew<br>
 <input type="checkbox" name="owner" value="alex">Alex<br>
 <input type="checkbox" name="owner" value="tim">Tim<br>
 <input type="checkbox" name="owner" value="evan">Evan<br>
