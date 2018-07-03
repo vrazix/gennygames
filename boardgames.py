@@ -5,18 +5,21 @@ from distutils.util import strtobool
 from utils import refactor_json_data
 import dateparser
 import json
+import pandas as pd
 import random
 
 
-def least_recent_play(game):
+def least_recent_play(game, sort=True):
     '''Return a value for a game based on it's overall least recent play.'''
     if game['plays']:
         return dateparser.parse(sorted(game['plays'], key=lambda play: dateparser.parse(play['playDate']))[0]['playDate'])
     else:
-        return dateparser.parse('jan 1 1980')
+        if sort:
+            return dateparser.parse('jan 1 1980')
+        return 'No play data.'
 
 
-def viable_game_list(games, n_players, an_owner, sort_option='least_recent'):
+def viable_game_list(games, n_players, an_owner, sort_option='least_recent', as_dataframe=False):
     '''Return a list of games that you can play!
 
     `games` is the bg_data['games'] from 'master_bg_data.json'
@@ -52,6 +55,12 @@ def viable_game_list(games, n_players, an_owner, sort_option='least_recent'):
 
     viable_games.sort(key=sort_func[sort_option])
 
+    if as_dataframe:
+        df = pd.DataFrame(data={'Game': [game['Name'] for game in viable_games], 
+                                'Recent Play': [least_recent_play(game, sort=False) for game in viable_games]})#, 
+                          #columns=['Game', 'Recent Play'])
+        return df
+
     return viable_games
 
 
@@ -82,4 +91,7 @@ if __name__ == '__main__':
     #players = refactor_json_data(bg_data['players'], 'id')
     #locations = refactor_json_data(bg_data['locations'], 'id')
     games = load_data()
-    show_me_games(viable_game_list(games, 3, 'tricia'))
+    #show_me_games(viable_game_list(games, 3, 'tricia'))
+
+    df = viable_game_list(games, 3, 'andrew', as_dataframe=True)
+    print(df.to_string())
