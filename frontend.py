@@ -1,12 +1,19 @@
 from boardgames import viable_game_list, load_data
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_from_directory
 app = Flask(__name__)
+app.add_url_rule('/favicon.ico',
+                 redirect_to=url_for('static', filename='favicon.ico'))
 
 GAMES = load_data()
 
 #@app.route('/')
 #def homepage():
 #    return """<h1>Genny Games</h1>"""
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
