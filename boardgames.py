@@ -1,6 +1,7 @@
 '''Convenience functions to calculate on refactored BGStatsExport.json
 and Google Sheets data.'''
 
+from distutils.util import strtobool
 from utils import refactor_json_data
 import dateparser
 import json
@@ -41,7 +42,7 @@ def viable_game_list(games, n_players, an_owner, sort_option='least_recent'):
                     }
 
     viable_games = []
-    available_games = {bgg_id: game for bgg_id, game in games.items() if owner_decode[an_owner](game)}
+    available_games = {bgg_id: game for bgg_id, game in games.items() if owner_decode[an_owner](game) and not strtobool(game['IsExpansion'])}
     for bgg_id, game in available_games.items():
         if int(game['Max Players']) >= n_players >= int(game['Min Players']):
             viable_games.append(game)
