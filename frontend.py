@@ -29,14 +29,14 @@ def index():
         return render_template('tables.html', tables=[result.to_html(classes='games')], titles=['na', 'Available Games'])
 
     return '''<form method="post">
-<input type="radio" name="owner" value="tricia">Tricia/Travis
-<input type="radio" name="owner" value="ryan">Ryan/Sam
-<input type="radio" name="owner" value="andrew">Sam/Andrew
-<input type="radio" name="owner" value="alex">Alex
-<input type="radio" name="owner" value="tim">Tim
-<input type="radio" name="owner" value="evan">Evan
+<input type="radio" name="owner" required value="tricia" checked="checked">Tricia/Travis
+<input type="radio" name="owner" required value="ryan">Ryan/Sam
+<input type="radio" name="owner" required value="andrew">Sam/Andrew
+<input type="radio" name="owner" required value="alex">Alex
+<input type="radio" name="owner" required value="tim">Tim
+<input type="radio" name="owner" required value="evan">Evan
 <p>Number of players:</p>
-<input type="number" name="players" min="1" max="12" value="4">
+<input type="number" required pattern="\d+" name="players" min="1" max="12" value="4">
 <input type="submit">
 </form>'''
 
