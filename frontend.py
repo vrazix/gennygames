@@ -36,5 +36,5 @@ def index():
 
 #app.add_url_rule('/favicon.ico',
 #                 redirect_to=url_for('static', filename='favicon.ico'))
-
-app.run(use_reloader=True)
+if __name__ == '__main__':
+	app.run(use_reloader=True)
